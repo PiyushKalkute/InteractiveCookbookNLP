@@ -1,0 +1,2 @@
+# InteractiveCookbookNLP
+Created a parser configured to recognize various ingredients, tools and cooking methods used in any given recipe. Developed framework to ensure seamless transformations on the recipe along the requested dimensions (To and from vegetarian, double the amount or cut it by half, changing cuisine, making it healthy etc.) by using our system’s internal representation for ingredients, cooking methods and tools.
