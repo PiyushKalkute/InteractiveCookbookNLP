@@ -10,7 +10,7 @@ def recipe_parser(recipe):
 
     for i in (recipe['ingredients']):
         dic[i] = {}
-        x = re.findall('\w+ed ', i)
+        x = re.findall('\w+ed |\w+ed$', i)
         if x != []:
             dic[i] = {'Preparation': x}
 
