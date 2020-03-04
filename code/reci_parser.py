@@ -12,6 +12,8 @@ def recipe_parser(recipe):
         dic[i] = {}
         x = re.findall('\w+ed |\w+ed$', i)
         if x != []:
+            red = "red "
+            if red in x: x.remove(red)
             dic[i] = {'Preparation': x}
 
     for i in (recipe['ingredients']):

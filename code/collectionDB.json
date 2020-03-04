@@ -1061,10 +1061,6 @@
     },
     {
       "healthy": "hummus",
-      "unhealthy": "mayo"
-    },
-    {
-      "healthy": "hummus",
       "unhealthy": "mayonnaise"
     },
     {
@@ -1086,14 +1082,6 @@
     {
       "healthy": "milk",
       "unhealthy": "creamer"
-    },
-    {
-      "healthy": "mustard",
-      "unhealthy": "mayo"
-    },
-    {
-      "healthy": "mustard",
-      "unhealthy": "mayonnaise"
     },
     {
       "healthy": "nuts",
@@ -1134,10 +1122,6 @@
     {
       "healthy": "smashed avocado",
       "unhealthy": "jam"
-    },
-    {
-      "healthy": "smashed avocado",
-      "unhealthy": "jelly"
     },
     {
       "healthy": "sprouted toast",
@@ -1424,6 +1408,10 @@
     {
       "other": "parmesan cheese",
       "indian": "chhena"
+    },
+    {
+      "other": "hummus",
+      "indian": "coconut chutney"
     },
     {
       "other": "cheddar cheese",

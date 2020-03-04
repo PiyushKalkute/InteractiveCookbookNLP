@@ -1,6 +1,7 @@
 import fractions
 import json
 import re
+import random
 import numpy as np
 from reci_scraper import RecipeFetcher
 import reci_parser as p
@@ -250,13 +251,12 @@ def toNonVeg(nv_recipe):
                     n_veg_flag+=1
                     if n_veg_flag == 2:
                         break
-
             if curr in veg_dict:  # and not (any(substring in curr for substring in spices)):
                 veg_ing.append(curr)
                 nv_sub = meat_dict[random.randint(0, len(meat_dict))]['nonveg']
                 nv_ing.append(nv_sub)
-                curr = curr.replace(curr, nv_sub)
                 print("- ", curr, "was replaced with ", nv_sub)
+                curr = curr.replace(curr, nv_sub)
                 nv_recipe[i]['Ingredient Name'] = curr
                 n_veg_flag += 1
                 if n_veg_flag == 2:
