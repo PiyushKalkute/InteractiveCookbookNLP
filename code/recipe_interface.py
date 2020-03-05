@@ -413,6 +413,8 @@ def display_transform_info():
         i+=1
 
 fl = True
+inp = 0
+prev_inp =0
 while(fl == True):
     
     line_sep(1)
@@ -426,9 +428,18 @@ while(fl == True):
     print('6. Double the quantity')
     print('7. Half the quantity')
     print('8. Exit')
-    
-    inp = int(input('Enter your choice: '))
-    if inp == 1:
+
+
+    curr_inp = int(input('Enter your choice: '))
+    if curr_inp!=prev_inp:
+        inp = curr_inp
+        prev_inp = curr_inp
+    else:
+        inp = 0
+        prev_inp = curr_inp
+    if inp == 0:
+        display_transform_info()
+    elif inp == 1:
         recipe['directions'] = to_Healthy(initial_dic)
         display_transform_info()
     elif inp == 2:

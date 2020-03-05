@@ -825,6 +825,10 @@
       "veg": "seitan"
     },
     {
+      "nonveg": "salami",
+      "veg": "black bean"
+    },
+    {
       "nonveg": "veal",
       "veg": "soybean"
     },
@@ -997,7 +1001,7 @@
     },
     {
       "healthy": "chia seeds",
-      "unhealthy": "breadcrumbs"
+      "unhealthy": "bread crumbs"
     },
     {
       "healthy": "chicken stock",
