@@ -317,9 +317,13 @@ initial_dic= p.recipe_parser(recipe)
 # quantity, primary/secondary directions, tools, preparations
 # and directions to the recipe
 def display_recipe_info():
+<<<<<<< HEAD
     
     line_sep(1)
     
+=======
+    print("==============================================================")
+>>>>>>> c93070bf7b5c7ae16ed74f60bee752f90e0367d1
     print('Ingredient Name')
     for i in initial_dic:
         print('-',initial_dic[i]['Ingredient Name'])

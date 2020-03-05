@@ -4,7 +4,6 @@ import requests
 
 
 class RecipeFetcher:
-    # search_base_url = 'https://www.allrecipes.com/search/results/?wt=%s&sort=re'
 
     def search_recipes(self, url):
         search_url = url
@@ -24,7 +23,7 @@ class RecipeFetcher:
                                   page_graph.find_all('span', {'itemprop': 'recipeIngredient'})]
 
         results['labels'] = [ingredient.text for ingredient in \
-                             #                                   page_graph.find_all('span', {'itemprop':'recipeIngredient'})
+                             # page_graph.find_all('span', {'itemprop':'recipeIngredient'})
                              page_graph.find_all('span', {'data-id': '0'})]
 
         results['directions'] = [direction.text.strip() for direction in \
