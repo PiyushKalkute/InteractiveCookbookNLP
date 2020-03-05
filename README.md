@@ -100,7 +100,7 @@ transforming your recipe to:
 7. Indian
 
 
-### Highlights
+## Highlights
 
 #### Cascading Transforms
   -> Each transformation is incremental on the previous one, i.e. retaining all
