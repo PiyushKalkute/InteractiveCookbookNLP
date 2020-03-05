@@ -45,7 +45,7 @@ def to_Healthy(recipe_dic):
         for j in health_dict:
             if (j['unhealthy']) in curr and not(any(substring in curr for substring in healthy)):
                 recipe_dic[i]['Ingredient Name'] = j['healthy']
-                arr.append(curr)
+                arr.append(j['unhealthy'])
                 arr2.append(j['healthy'])
                 print("- ",curr,"was replaced with ",j['healthy'])
     for k in recipe['directions']:
@@ -53,6 +53,12 @@ def to_Healthy(recipe_dic):
             j = k.lower()
             if arr[i] in j:
                 k = j.replace(arr[i], arr2[i])
+            else:
+                try:
+                    if arr[i].split()[-1] in j:
+                        k = j.replace(arr[i].split()[-1], arr2[i])
+                except:
+                    pass
         transformed_directions.append(k)
     return transformed_directions
 
@@ -71,7 +77,7 @@ def to_Unhealthy(recipe_dic):
         for j in health_dict:
             if (j['healthy']) in curr:
                 recipe_dic[i]['Ingredient Name'] = j['unhealthy']
-                arr.append(curr)
+                arr.append(j['healthy'])
                 arr2.append(j['unhealthy'])
                 print("- ", curr, "was replaced with ", j['unhealthy'])
     for k in recipe['directions']:
@@ -79,6 +85,12 @@ def to_Unhealthy(recipe_dic):
             j = k.lower()
             if arr[i] in j:
                 k = j.replace(arr[i], arr2[i])
+            else:
+                try:
+                    if arr[i].split()[-1] in j:
+                        k = j.replace(arr[i].split()[-1], arr2[i])
+                except:
+                    pass
         transformed_directions.append(k)
     return transformed_directions
 
@@ -207,18 +219,15 @@ def toVeg(nv_recipe):
             if a['nonveg'] in j:
                 k = j.replace(a['nonveg'], a['veg'])
                 j = k
+            else:
+                try:
+                    if a['nonveg'].split()[-1] in j:
+                        k = j.replace(a['nonveg'].split()[-1], a['veg'])
+                except:
+                    pass
 
         transformed_directions.append(k)
-
-    for k in transformed_directions:
-        j = k.lower()
-        for a in meat_dict:
-            for word in a['nonveg'].split():
-                if word in j:
-                    k = j.replace(word, a['veg'])
-                    j = k
-        steps.append(k)
-    return steps
+    return transformed_directions
 
 
 # adds meat to the recipe, even if it's not there
@@ -267,6 +276,12 @@ def toNonVeg(nv_recipe):
             if veg_ing[a] in j:
                 k = j.replace(veg_ing[a], nv_ing[a])
                 j = k
+            else:
+                try:
+                    if veg_ing[a].split()[-1] in j:
+                        k = j.replace(veg_ing[a].split()[-1], nv_ing[a])
+                except:
+                    pass
         transformed_directions.append(k)
     return transformed_directions
 
