@@ -23,15 +23,12 @@ veg_dict = json_data["vegetables"]
 def to_Healthy(recipe_dic):
     arr = []
     arr2 = []
-    steps =[]
     transformed_directions = []
     print("=============================================================================================================")
     print("========================================TRANSFORMATION LOG===================================================")
     for i in recipe_dic:
-        #print(recipe_dic[i]['Ingredient Name'])
         curr = recipe_dic[i]['Ingredient Name'].lower()
 
-        # print(dic[i]['Ingredient Name'])
         for j in health_dict:
             if (j['unhealthy']) in curr and not (any(substring in curr for substring in healthy)):
                 recipe_dic[i]['Ingredient Name'] = j['healthy']
@@ -39,24 +36,11 @@ def to_Healthy(recipe_dic):
                 arr2.append(j['healthy'])
                 print("- ",curr,"was replaced with ",j['healthy'])
     for k in recipe['directions']:
-
-        fl = False
         for i in range(len(arr)):
             j = k.lower()
             if arr[i] in j:
                 k = j.replace(arr[i], arr2[i])
-        #                 print(k)
         transformed_directions.append(k)
-    #
-    # for k in transformed_directions:
-    #     j = k.lower()
-    #     for a in range(len(arr)):
-    #         for word in arr[a].split():
-    #             if word in j:
-    #                 k = j.replace(word, arr2[a])
-    #                 j = k
-    #     steps.append(k)
-    # return steps
     return transformed_directions
 
 
@@ -71,7 +55,6 @@ def to_Unhealthy(recipe_dic):
 
     for i in recipe_dic:
         curr = recipe_dic[i]['Ingredient Name'].lower()
-        # print(dic[i]['Ingredient Name'])
         for j in health_dict:
             if (j['healthy']) in curr:
                 recipe_dic[i]['Ingredient Name'] = j['unhealthy']
@@ -83,7 +66,6 @@ def to_Unhealthy(recipe_dic):
             j = k.lower()
             if arr[i] in j:
                 k = j.replace(arr[i], arr2[i])
-                # print(k)
         transformed_directions.append(k)
     return transformed_directions
 
@@ -98,7 +80,6 @@ def to_Indian(recipe_dic):
 
     for i in recipe_dic:
         curr = recipe_dic[i]['Ingredient Name'].lower()
-        # print(dic[i]['Ingredient Name'])
         for a in style_dict:
             if a in curr:
                 k = curr.replace(a, 'indian')
@@ -129,7 +110,6 @@ def to_Indian(recipe_dic):
                 if word in j:
                     k = j.replace(word, a['indian'])
                     j = k
-
         steps.append(k)
     return steps
 
@@ -180,7 +160,6 @@ def to_half(recipe_dic):
 
 def toVeg(nv_recipe):
     arr = []
-    arr2 = []
     steps = []
     transformed_directions = []
     print(
@@ -221,8 +200,6 @@ def toVeg(nv_recipe):
 
 
 def toNonVeg(nv_recipe):
-    found_veg = False
-
     veg_ing = []
     nv_ing = []
 
@@ -261,7 +238,7 @@ def toNonVeg(nv_recipe):
                 n_veg_flag += 1
                 if n_veg_flag == 2:
                     break
-    steps = []
+
     for k in recipe['directions']:
         j = k.lower()
         for a in range(0, len(nv_ing)):
@@ -269,16 +246,6 @@ def toNonVeg(nv_recipe):
                 k = j.replace(veg_ing[a], nv_ing[a])
                 j = k
         transformed_directions.append(k)
-
-
-
-    # for k in recipe['directions']:
-    #     j = k.lower()
-    #     for a in range(len(veg_ing)):
-    #         if veg_ing[a] in j:
-    #             k = j.replace(veg_ing[a], nv_ing[a])
-    #     transformed_directions.append(k)
-
     return transformed_directions
 
 
@@ -320,6 +287,7 @@ initial_dic= p.recipe_parser(recipe)
 
 #WRITE CODE FOR GETTING DIC FROM THE SCRAPED AND PARSED DATA
 def display_recipe_info():
+    print("==============================================================")
     print('Ingredient Name')
     for i in initial_dic:
         print('-',initial_dic[i]['Ingredient Name'])

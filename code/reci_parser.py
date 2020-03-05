@@ -19,7 +19,6 @@ def recipe_parser(recipe):
     for i in (recipe['ingredients']):
         if 'egg' in i:
             pass
-        # print(i)
         else:
             if '(' in i and '%' not in i:
                 x = re.findall('\(\d+ (\w+)\)', i)
@@ -62,12 +61,8 @@ def recipe_parser(recipe):
             x = i
             if ')' in i:
                 x = re.sub('.*\(.*\) \w+', '', x)
-            #         if x!=[]:
-            #             dic[i]['Quantity'] = x
             if '/' in i:
                 x = re.sub('\/', '', x)
-            #             if x!=[]:
-            #                 dic[i]['Quantity'] = mixed_to_float(x[0])
             x = re.sub('\d+', '', x)
             try:
                 x = re.sub(dic[i]['Measurement'][0], '', x)
