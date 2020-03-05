@@ -1,4 +1,3 @@
-import fractions
 import json
 import re
 import random
@@ -20,58 +19,55 @@ secondary_cooking = json_data["methods"]["secondary"]
 healthy = ['wheat', 'cottage','sauce']
 meat_dict = json_data["nonvegToVeg"]
 veg_dict = json_data["vegetables"]
+
+
+# macro defined for line seperators
+def line_sep(flag):
+    if flag:
+        print("=============================================================================================================")
+    else:
+        print("========================================TRANSFORMATION LOG===================================================")
+    return
+
+
+# tranformation to any recipe's healthier version
 def to_Healthy(recipe_dic):
     arr = []
     arr2 = []
-    steps =[]
     transformed_directions = []
-    print("=============================================================================================================")
-    print("========================================TRANSFORMATION LOG===================================================")
+    
+    line_sep(1)
+    line_sep(0)
+    
     for i in recipe_dic:
-        #print(recipe_dic[i]['Ingredient Name'])
         curr = recipe_dic[i]['Ingredient Name'].lower()
 
-        # print(dic[i]['Ingredient Name'])
         for j in health_dict:
-            if (j['unhealthy']) in curr and not (any(substring in curr for substring in healthy)):
+            if (j['unhealthy']) in curr and not(any(substring in curr for substring in healthy)):
                 recipe_dic[i]['Ingredient Name'] = j['healthy']
                 arr.append(curr)
                 arr2.append(j['healthy'])
                 print("- ",curr,"was replaced with ",j['healthy'])
     for k in recipe['directions']:
-
-        fl = False
         for i in range(len(arr)):
             j = k.lower()
             if arr[i] in j:
                 k = j.replace(arr[i], arr2[i])
-        #                 print(k)
         transformed_directions.append(k)
-    #
-    # for k in transformed_directions:
-    #     j = k.lower()
-    #     for a in range(len(arr)):
-    #         for word in arr[a].split():
-    #             if word in j:
-    #                 k = j.replace(word, arr2[a])
-    #                 j = k
-    #     steps.append(k)
-    # return steps
     return transformed_directions
 
 
+# convert to a more unhealthy counterpart of the recipe
 def to_Unhealthy(recipe_dic):
     arr = []
     arr2 = []
     transformed_directions = []
-    print(
-        "=============================================================================================================")
-    print(
-        "========================================TRANSFORMATION LOG===================================================")
+    
+    line_sep(1)
+    line_sep(0)
 
     for i in recipe_dic:
         curr = recipe_dic[i]['Ingredient Name'].lower()
-        # print(dic[i]['Ingredient Name'])
         for j in health_dict:
             if (j['healthy']) in curr:
                 recipe_dic[i]['Ingredient Name'] = j['unhealthy']
@@ -83,22 +79,21 @@ def to_Unhealthy(recipe_dic):
             j = k.lower()
             if arr[i] in j:
                 k = j.replace(arr[i], arr2[i])
-                # print(k)
         transformed_directions.append(k)
     return transformed_directions
 
+
+# change the cuisine style to Indian
 def to_Indian(recipe_dic):
     arr = []
     steps = []
     transformed_directions = []
-    print(
-        "=============================================================================================================")
-    print(
-        "========================================TRANSFORMATION LOG===================================================")
+    
+    line_sep(1)
+    line_sep(0)
 
     for i in recipe_dic:
         curr = recipe_dic[i]['Ingredient Name'].lower()
-        # print(dic[i]['Ingredient Name'])
         for a in style_dict:
             if a in curr:
                 k = curr.replace(a, 'indian')
@@ -129,11 +124,12 @@ def to_Indian(recipe_dic):
                 if word in j:
                     k = j.replace(word, a['indian'])
                     j = k
-
         steps.append(k)
     return steps
 
 
+# updates the minutes or duration of cooking
+# helper function for to_double and to_half
 def cut_or_double(direction,n):
     updated_direc =[]
     for i in direction:
@@ -148,45 +144,50 @@ def cut_or_double(direction,n):
             updated_direc.append(i)
     return updated_direc
 
+
+# doubles the recipe 
 def to_double(recipe_dic):
-    print(
-        "=============================================================================================================")
-    print(
-        "========================================TRANSFORMATION LOG===================================================")
+    
+    line_sep(1)
+    line_sep(0)
+    
     for i in recipe_dic:
         try:
             recipe_dic[i]['Quantity'] = 2*recipe_dic[i]['Quantity']
-
         except:
             pass
+        
     update_dir1 = cut_or_double(recipe['directions'],1.5)
     return update_dir1
 
 
+# cuts the recipe into half
 def to_half(recipe_dic):
-    print(
-        "=============================================================================================================")
-    print(
-        "========================================TRANSFORMATION LOG===================================================")
+    
+    line_sep(1)
+    line_sep(0)
+    
     for i in recipe_dic:
         try:
 
             recipe_dic[i]['Quantity'] = 0.5*recipe_dic[i]['Quantity']
         except:
             pass
+        
     update_dir1 = cut_or_double(recipe['directions'],0.75)
     return update_dir1
 
 
+# transforms to a vegetarian version of the recipe
 def toVeg(nv_recipe):
+    
     arr = []
-    arr2 = []
     steps = []
     transformed_directions = []
-    print(
-        "=============================================================================================================")
-    print(
-        "========================================TRANSFORMATION LOG===================================================")
+    
+    line_sep(1)
+    line_sep(0)
+    
     for i in nv_recipe:
         curr = nv_recipe[i]['Ingredient Name'].lower()
         # print(curr)
@@ -220,17 +221,15 @@ def toVeg(nv_recipe):
     return steps
 
 
+# adds meat to the recipe, even if it's not there
 def toNonVeg(nv_recipe):
-    found_veg = False
-
     veg_ing = []
     nv_ing = []
 
     transformed_directions = []
-    print(
-        "=============================================================================================================")
-    print(
-        "========================================TRANSFORMATION LOG===================================================")
+    
+    line_sep(1)
+    line_sep(0)
 
     for i in nv_recipe:
         curr = nv_recipe[i]['Ingredient Name'].lower()
@@ -251,7 +250,7 @@ def toNonVeg(nv_recipe):
                     n_veg_flag+=1
                     if n_veg_flag == 2:
                         break
-            if curr in veg_dict:  # and not (any(substring in curr for substring in spices)):
+            if curr in veg_dict:  
                 veg_ing.append(curr)
                 nv_sub = meat_dict[random.randint(0, len(meat_dict))]['nonveg']
                 nv_ing.append(nv_sub)
@@ -261,7 +260,7 @@ def toNonVeg(nv_recipe):
                 n_veg_flag += 1
                 if n_veg_flag == 2:
                     break
-    steps = []
+
     for k in recipe['directions']:
         j = k.lower()
         for a in range(0, len(nv_ing)):
@@ -269,28 +268,23 @@ def toNonVeg(nv_recipe):
                 k = j.replace(veg_ing[a], nv_ing[a])
                 j = k
         transformed_directions.append(k)
-
-
-
-    # for k in recipe['directions']:
-    #     j = k.lower()
-    #     for a in range(len(veg_ing)):
-    #         if veg_ing[a] in j:
-    #             k = j.replace(veg_ing[a], nv_ing[a])
-    #     transformed_directions.append(k)
-
     return transformed_directions
 
 
-print("Welcome to Hell's Kitchen. Provide a valid Allrecipes.com url of recipe of your choice or type 'exit' to cancel. ")
+# main user-interface for a human-friendly 
+print("Welcome to Hell's Kitchen. Provide a valid Allrecipes.com url/"
+      "of recipe of your choice or type 'exit' to cancel. ")
 req_url = (input("Enter recipe URL : "))
 
+# instacne created of the Recipe Fetcher API
 rf = RecipeFetcher()
 
+# scraped recipes
 recipe = (rf.scrape_recipe(req_url))
 
-
 primary_methods = []
+
+# extracting primary and secondary methods as well as tools 
 for k in recipe['directions']:
     fl = False
     j = k.lower()
@@ -314,12 +308,18 @@ recipe['tools'] = np.unique(tools)
 recipe['primary methods'] = np.unique(primary_methods)
 recipe['secondary methods'] = np.unique(secondary_methods)
 
+# extracted recipe (raw)
 print(recipe)
 initial_dic= p.recipe_parser(recipe)
 
 
-#WRITE CODE FOR GETTING DIC FROM THE SCRAPED AND PARSED DATA
+# Obtaining recipe and parsing it for ingredient name,
+# quantity, primary/secondary directions, tools, preparations
+# and directions to the recipe
 def display_recipe_info():
+    
+    line_sep(1)
+    
     print('Ingredient Name')
     for i in initial_dic:
         print('-',initial_dic[i]['Ingredient Name'])
@@ -330,40 +330,50 @@ def display_recipe_info():
             print('-',initial_dic[i]['Quantity'])
         except:
             pass
+        
     print('Measurement:')
     for i in initial_dic:
         try:
             print('-',initial_dic[i]['Measurement'])
         except:
             pass
+        
     print('Preparation:')
     for i in initial_dic:
         try:
             print('-', initial_dic[i]['Preparation'])
         except:
             pass
+        
     print('Tools used:')
     for j  in recipe['tools']:
         print('-', j)
-    print("=============================================================================================================")
+        
+    line_sep(1)
     print('Primary Cooking methods used:')
     for j  in recipe['primary methods']:
         print('-', j)
-    print("=============================================================================================================")
+
+    line_sep(1)
     print('Secondary Cooking methods used:')
     for j  in recipe['secondary methods']:
         print('-', j)
 
-    print("=============================================================================================================")
+    line_sep(1)
     print('Steps:')
     for j  in recipe['directions']:
         print('-', j)
+        
+# display extracted information
 display_recipe_info()
 
+
+# display the transformed recipe
 def display_transform_info():
-    print(
-        "=============================================================================================================")
+    
+    line_sep(1)
     print("Ingredients used: ")
+    
     for i in initial_dic:
         try:
             print(initial_dic[i]['Quantity'], " ", end="")
@@ -379,7 +389,8 @@ def display_transform_info():
         except:
             pass
         print(initial_dic[i]['Ingredient Name'])
-    print("=============================================================================================================")
+        
+    line_sep(1)
     i = 1
     print('Steps used:')
     for j in recipe['directions']:
@@ -388,8 +399,9 @@ def display_transform_info():
 
 fl = True
 while(fl == True):
-    print("=============================================================================================================")
-
+    
+    line_sep(1)
+    # switch case for various transformation options
     print("What transformation would you like to apply now to the recipe: ")
     print('1. To Healthy')
     print('2. To Unhealthy')
@@ -426,5 +438,3 @@ while(fl == True):
         fl = False
         print("Bye... Hope to see you soon... Until next time...")
         break
-
-
