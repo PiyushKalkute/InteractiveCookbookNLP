@@ -317,13 +317,9 @@ initial_dic= p.recipe_parser(recipe)
 # quantity, primary/secondary directions, tools, preparations
 # and directions to the recipe
 def display_recipe_info():
-<<<<<<< HEAD
     
     line_sep(1)
-    
-=======
-    print("==============================================================")
->>>>>>> c93070bf7b5c7ae16ed74f60bee752f90e0367d1
+
     print('Ingredient Name')
     for i in initial_dic:
         print('-',initial_dic[i]['Ingredient Name'])
@@ -415,8 +411,8 @@ while(fl == True):
     print('6. Double the quantity')
     print('7. Half the quantity')
     print('8. Exit')
+    
     inp = int(input('Enter your choice: '))
-    print(inp)
     if inp == 1:
         recipe['directions'] = to_Healthy(initial_dic)
         display_transform_info()
