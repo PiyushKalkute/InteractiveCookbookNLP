@@ -1,4 +1,6 @@
 beautifulsoup4
-fractions
+fraction
 requests
+numpy
+lxml
 
