@@ -47,7 +47,7 @@ def to_Healthy(recipe_dic):
                 recipe_dic[i]['Ingredient Name'] = j['healthy']
                 arr.append(j['unhealthy'])
                 arr2.append(j['healthy'])
-                print("- ",curr,"was replaced with ",j['healthy'])
+                print("- ",j['unhealthy'],"was replaced with ",j['healthy'])
     for k in recipe['directions']:
         for i in range(len(arr)):
             j = k.lower()
@@ -79,7 +79,7 @@ def to_Unhealthy(recipe_dic):
                 recipe_dic[i]['Ingredient Name'] = j['unhealthy']
                 arr.append(j['healthy'])
                 arr2.append(j['unhealthy'])
-                print("- ", curr, "was replaced with ", j['unhealthy'])
+                print("- ", j['healthy'], "was replaced with ", j['unhealthy'])
     for k in recipe['directions']:
         for i in range(len(arr)):
             j = k.lower()
